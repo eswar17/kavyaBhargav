@@ -43,3 +43,11 @@ body {
     background-image: url('grass.png');
     background-size: cover;
 }
+
+#musicControl {
+    position: absolute;
+    bottom: 40px; /* Adjust as needed */
+    left: 50%; /* Aligns the button horizontally at the center */
+    transform: translateX(-50%); /* Center the button horizontally */
+	opacity: 0.5;
+}
