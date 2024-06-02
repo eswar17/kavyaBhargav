@@ -6,7 +6,7 @@
     <title>Bride and Groom Maze Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body >
     <div id="gameArea">
         <div id="bride" class="character"></div>
         <div id="groom" class="character"></div>
@@ -71,6 +71,14 @@
 		<div class="grass" style="top: 493px; left: 323px; width:  34px; height: 102px;"></div>
         <!-- Add more grass as needed to create the full maze -->
     </div>
+	
+	<button id="musicControl" onclick="toggleMusic()"></button>
+
+    <audio id="backgroundMusic" loop>
+        <source src="../mazeGame.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+	
     <script src="script.js"></script>
 </body>
 </html>
