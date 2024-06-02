@@ -9,8 +9,8 @@ body {
 
 #gameArea {
     position: relative;
-    width: 800px;
-    height: 600px;
+    width: 680px;
+    height: 680px;
     background-color: #e0e0e0;
     border: 2px solid #000;
 }
@@ -25,13 +25,17 @@ body {
 #bride {
     background-image: url('bride.png'); /* Add your bride image */
     left: 5px;
-    top: 82px;
+    top: 53px;
+	width: 25.5px; 
+	height: 25.5px;
 }
 
 #groom {
     background-image: url('groom.png'); /* Add your groom image */
-    right: 5px;
-    bottom: 50px;
+    right: 53px;
+    bottom: 5px;
+	width: 24px; 
+	height: 24px;
 }
 
 .grass {
