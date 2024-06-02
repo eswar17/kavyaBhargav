@@ -2,8 +2,11 @@ const bride = document.getElementById('bride');
 const groom = document.getElementById('groom');
 const gameArea = document.getElementById('gameArea');
 const grassPatches = document.querySelectorAll('.grass');
+const backgroundMusic = document.getElementById('backgroundMusic');
 
 let isMeeting = false;
+let isGameStarted = false;
+let isMusicPlaying = false;
 
 const moveCharacter = (character, direction) => {
     const step = 10;
@@ -77,6 +80,12 @@ const checkMeet = () => {
 };
 
 document.addEventListener('keydown', (event) => {
+	if (!isGameStarted) {
+        startGame();
+        isGameStarted = true;
+		musicControl.innerHTML = "Pause Music";
+    }
+	
     switch(event.key) {
         case 'a':
             moveCharacter(bride, 'left');
@@ -104,3 +113,26 @@ document.addEventListener('keydown', (event) => {
             break;
     }
 });
+
+function initGame() {
+    musicControl.innerHTML = "Play Music";
+}
+
+function startGame() {
+    backgroundMusic.play().catch(error => {
+        console.log('Background music play failed:', error);
+    });
+}
+
+function toggleMusic() {
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
+        musicControl.innerHTML = "Play Music";
+    } else {
+        backgroundMusic.play().catch(error => {
+            console.log('Background music play failed:', error);
+        });
+        musicControl.innerHTML = "Pause Music";
+    }
+    isMusicPlaying = !isMusicPlaying;
+}
