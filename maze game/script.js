@@ -90,16 +90,16 @@ document.addEventListener('keydown', (event) => {
         case 's':
             moveCharacter(bride, 'down');
             break;
-        case 'j':
+        case 'ArrowLeft':
             moveCharacter(groom, 'left');
             break;
-        case 'l':
+        case 'ArrowRight':
             moveCharacter(groom, 'right');
             break;
-        case 'i':
+        case 'ArrowUp':
             moveCharacter(groom, 'up');
             break;
-        case 'k':
+        case 'ArrowDown':
             moveCharacter(groom, 'down');
             break;
     }
