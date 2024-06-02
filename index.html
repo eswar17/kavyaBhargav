@@ -210,6 +210,73 @@
             text-decoration: none; /* Remove default underline */
             cursor: pointer; /* Show pointer cursor on hover */
         }
+		.menu {
+			list-style: none;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+		}
+
+		.menu li {
+			margin: 10px;
+			transform: translateY(50px);
+			opacity: 0;
+			animation: slideIn 0.5s forwards;
+		}
+		
+		.menu li:nth-child(1) { animation-delay: 0.2s; }
+		.menu li:nth-child(2) { animation-delay: 0.4s; }
+		.menu li:nth-child(3) { animation-delay: 0.6s; }
+	
+		.menu li a {
+			text-decoration: none;
+			color: #fff;
+			font-weight: bold;
+			padding: 10px 20px;
+			background-color: #00a550;
+			border-radius: 10px;
+			transition: background-color 0.3s;
+			position: relative; /* Needed for z-index to work */
+			overflow: hidden; /* Hide overflow of pseudo-element */
+		}
+
+		.menu li:hover a::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #15ba65;
+			z-index: -1;
+			animation: shake 1s; /* Apply shake animation */
+		}
+		
+		@keyframes slideIn {
+			0% {
+				transform: translateY(50px);
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+
+		@keyframes shake {
+			0%, 100% {
+				transform: translateX(0);
+			}
+			10%, 30%, 50%, 70%, 90% {
+				transform: translateX(-5px);
+			}
+			20%, 40%, 60%, 80% {
+				transform: translateY(5px);
+			}
+		}
+	}
+
+
     </style>
     <script>
         function show(sectionId) {
@@ -223,6 +290,32 @@
             });
             return false;
         }
+		function showContent(contentType) {
+        var contentDiv = document.getElementById('content');
+        switch (contentType) {
+            case 'videos':
+                contentDiv.innerHTML = `
+                    <video controls>
+                        <source src="./videos/fun/anniversary.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                break;
+            case 'pics':
+                contentDiv.innerHTML = `
+                    <!-- Add your pics content here -->
+                `;
+                break;
+            case 'games':
+                contentDiv.innerHTML = `
+                    <iframe src="./maze game/index.html" style="width:100%; height:800px; border:none;"></iframe>
+                `;
+                break;
+            default:
+                // For any other content type, keep the div empty
+                contentDiv.innerHTML = '';
+        }
+    }
     </script>
 </head>
 <body>
@@ -287,14 +380,18 @@
             Your browser does not support the video tag.
         </video>
     </section>
-    <section id="fun" style="display:none;">
-        <h2>Let's Have Some Fun!</h2>
-        <p>Include some fun activities or anecdotes here.</p>
-		<video controls>
-            <source src=".\videos\fun\anniversary.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
+	<section id="fun" style="display:none;">
+		<h2>Let's Have Some Fun!</h2>
+		<p>Choose what you want to see:</p>
+		<ul class="menu">
+			<li><a href="#" onclick="showContent('videos')">Videos</a></li>
+			<li><a href="#" onclick="showContent('pics')">Pics</a></li>
+			<li><a href="#" onclick="showContent('games')">Game</a></li>
+		</ul>
+		<div id="content">
+			<!-- Content will be loaded here dynamically -->
+		</div>
+	</section>
     <!-- JavaScript to create falling symbols -->
     <script>
         function createFallingSymbol() {
