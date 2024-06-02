@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2nd Anniversary Kavya & Bhargav</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background-size: cover;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        header, nav {
+            background: linear-gradient(to right, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            text-align: center;
+        }
+        header {
+            color: white;
+            padding: 50px 0;
+        }
+        header h1 {
+            font-family: 'Lora', serif;
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081, 0 0 55px #ff4081, 0 0 75px #ff4081;
+            transform: perspective(500px) rotateY(0deg) rotateX(0deg); /* Centered text with 3D perspective */
+        }
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s, color 0.3s;
+        }
+        nav a::after {
+            content: attr(data-emoji);
+            margin-left: 5px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        nav a:hover {
+            transform: perspective(600px) rotateX(10deg) rotateY(10deg);
+            color: #ff4081;
+        }
+        nav a:hover::after {
+            transform: scale(1.5);
+        }
+        section {
+            background-color: rgba(255, 255, 255, 0.8);
+            margin: 20px auto;
+            padding: 30px;
+            max-width: 800px;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+		#videos video {
+			width: 48%;
+			height: auto;
+			border-radius: 8px;
+			margin-bottom: 10px;
+		}
+		
+		#fun video {
+			width: 48%;
+			height: auto;
+			border-radius: 8px;
+			margin-bottom: 10px;
+		}
+
+        .falling-symbol {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            color: red;
+            animation: fall 10s linear infinite;
+            opacity: 0.8;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(1.5);
+            }
+        }
+        /* Styles for Bhaavyam section */
+        #bhaavyam {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        #bhaavyam h2 {
+            color: #ff4081;
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        #bhaavyam h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        #bhaavyam ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        #bhaavyam li {
+            margin-bottom: 10px;
+        }
+        #bhaavyam li strong {
+            font-weight: bold;
+            color: #ff4081;
+        }
+        .pdf-container {
+            text-align: center;
+            flex: 1;
+            max-width: 45%;
+            box-sizing: border-box;
+        }
+        .pdf-container embed {
+            width: 340px;
+            height: 245px;
+        }
+        @media screen and (max-width: 100px) {
+            #bhaavyam {
+                flex-direction: column;
+            }
+            .pdf-container, #bhaavyam h3 {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+        .pdf-container {
+            flex: 1;
+            max-width: 45%;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+            position: relative;
+            width: 600px;
+            height: 245px;
+            text-align: center;
+            perspective: 1000px;
+        }
+        .pdf-container:hover .overlay {
+            display: block;
+            text-align: center;
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0);
+            color: #ff4081;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .popup embed {
+            width: 90%;
+            height: 90%;
+        }
+        .open-link {
+            color: #ff4081; /* Color same as "Engagement Date" */
+            text-decoration: none; /* Remove default underline */
+            cursor: pointer; /* Show pointer cursor on hover */
+        }
+    </style>
+    <script>
+        function show(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Happy 2nd Anniversary, Kavya & Bhargav!</h1>
+        <p>Celebrating two beautiful years of love and togetherness.</p>
+    </header>
+    <nav>
+        <a href="#bhaavyam" data-emoji="🤵👰" onclick="window.location.reload();">Bhaavyam</a>
+        <a href="#love-story" data-emoji="💑" onclick="return show('love-story');">Love Story</a>
+        <a href="#gallery" data-emoji="📸" onclick="return show('gallery');">Photo Gallery</a>
+        <a href="#videos" data-emoji="🎥" onclick="return show('videos');">Video Messages</a>
+        <a href="#fun" data-emoji="🎉" onclick="return show('fun');">Fun</a>
+    </nav>
+    <section id="bhaavyam">
+        <h2>Bhaavyam - Our Journey Together</h2>
+        <div>
+            <h3>Marriage</h3>
+            <ul>
+                <li><strong>Engagement Date:</strong> Saturday, 18 June 2022</li>
+                <li><strong>Marriage Date:</strong> Saturday, 20 August 2022</li>
+                <li><strong>Marriage Time:</strong> 08:20 PM</li>
+                <li><strong>Marriage Place:</strong> Machilipatnam</li>
+                <li><strong>Venue Hall:</strong> Mana Kalyana Mandapam</li>
+            </ul>
+        </div>
+        <div class="pdf-container">
+            <embed src="C:\Users\Admin\Desktop\html\kavya wedding card.pdf" type="application/pdf" width="600" height="800">
+            <div class="overlay"><a href="C:\Users\Admin\Desktop\html\kavya wedding card.pdf" class="open-link" target="_blank">View</a></div>
+        </div>
+    </section> 
+    <section id="love-story" style="display:none;">
+        <h2>Our Love Story</h2>
+        <p>From the moment we met to the countless memories we've created together...</p>
+        <p>Include the detailed love story here with photos and significant dates.</p>
+    </section>
+    <section id="gallery" style="display:none;">
+        <h2>Photo Gallery</h2>
+        <div class="gallery">
+            <img src="D:\Learning\Angular\First\src\assets\IMG_20220820_093721.jpg" alt="Photo 1">
+            <img src="D:\Learning\Angular\First\src\assets\IMG_20220820_195441_Bokeh.jpg" alt="Photo 2">
+            <img src="D:\Learning\Angular\First\src\assets\IMG_20220820_210238_Bokeh.jpg" alt="Photo 3">
+        </div>
+    </section>
+    <section id="videos" style="display:none;">
+        <h2>Video Messages</h2>
+        <p>Watch messages from friends and family.</p>
+        <video controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+		<video controls>
+			<source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+		<video controls>
+			<source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+		<video controls>
+			<source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+    <section id="fun" style="display:none;">
+        <h2>Let's Have Some Fun!</h2>
+        <p>Include some fun activities or anecdotes here.</p>
+		<video controls>
+            <source src="C:\Users\Admin\Desktop\html\anniversary.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+    <!-- JavaScript to create falling symbols -->
+    <script>
+        function createFallingSymbol() {
+            const symbol = document.createElement('div');
+            symbol.className = 'falling-symbol';
+            symbol.innerHTML = '❤️';
+            symbol.style.left = Math.random() * 100 + 'vw';
+            symbol.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.body.appendChild(symbol);
+            symbol.addEventListener('animationend', () => {
+                symbol.remove();
+            });
+        }
+        setInterval(createFallingSymbol, 600);
+    </script>
+</body>
+</html>
