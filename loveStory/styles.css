@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.slider-container {
+    position: relative;
+    z-index: 1;
+    padding: 40px;
+    color: black;
+    text-align: center;
+    background: linear-gradient(to right, #EEEE90 0%, #90EEBF 99%, #90EEEE 100%); /* Optional: to improve text readability */
+}
+
+
+.audio-icon {
+    cursor: pointer;
+    color: blue;
+	background: red;
+    //text-decoration: underline;
+}2
+
+.slide {
+    display: none;
+    padding: 20px;
+}
+
+.slide.active {
+    display: block;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ddd;
+    border-top: 1px solid #ccc;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
