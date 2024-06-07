@@ -71,20 +71,13 @@
             border-radius: 8px;
             margin-bottom: 10px;
         }
-		#videos video {
-			width: 48%;
-			height: auto;
-			border-radius: 8px;
-			margin-bottom: 10px;
-		}
-		
+		#videos video ,#love-story video,
 		#fun video {
 			width: 48%;
 			height: auto;
 			border-radius: 8px;
 			margin-bottom: 10px;
 		}
-
         .falling-symbol {
             position: fixed;
             top: -50px;
@@ -140,55 +133,28 @@
             font-weight: bold;
             color: #ff4081;
         }
-        .pdf-container {
-            text-align: center;
-            flex: 1;
-            max-width: 45%;
-            box-sizing: border-box;
-        }
-        .pdf-container embed {
+		
+		.pdf-container {
+    text-align: center;
+    flex: 1;
+    max-width: 45%;
+    box-sizing: border-box;
+}
+.pdf-container a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.pdf-container embed {
             width: 340px;
             height: 245px;
-        }
-        @media screen and (max-width: 100px) {
-            #bhaavyam {
-                flex-direction: column;
-            }
-            .pdf-container, #bhaavyam h3 {
-                max-width: 100%;
-                max-height: 100%;
-            }
-        }
-        .pdf-container {
-            flex: 1;
-            max-width: 45%;
-            box-sizing: border-box;
-            transition: transform 0.3s ease;
-            position: relative;
-            width: 600px;
-            height: 245px;
-            text-align: center;
-            perspective: 1000px;
-        }
-        .pdf-container:hover .overlay {
-            display: block;
-            text-align: center;
-            transform: rotateY(10deg) rotateX(10deg);
-        }
-        .overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0);
-            color: #ff4081;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            display: none;
-        }
+    pointer-events: none; /* Prevent interaction with the embed element itself */
+}
+.pdf-container a:hover embed {
+    transform: rotateY(1deg) rotateX(1deg);
+}
+
         .popup {
             position: fixed;
             top: 0;
@@ -216,18 +182,15 @@
 			display: flex;
 			justify-content: center;
 		}
-
 		.menu li {
 			margin: 10px;
 			transform: translateY(50px);
 			opacity: 0;
 			animation: slideIn 0.5s forwards;
 		}
-		
 		.menu li:nth-child(1) { animation-delay: 0.2s; }
 		.menu li:nth-child(2) { animation-delay: 0.4s; }
 		.menu li:nth-child(3) { animation-delay: 0.6s; }
-	
 		.menu li a {
 			text-decoration: none;
 			color: #fff;
@@ -239,7 +202,6 @@
 			position: relative; /* Needed for z-index to work */
 			overflow: hidden; /* Hide overflow of pseudo-element */
 		}
-
 		.menu li:hover a::before {
 			content: "";
 			position: absolute;
@@ -250,8 +212,7 @@
 			background-color: #15ba65;
 			z-index: -1;
 			animation: shake 1s; /* Apply shake animation */
-		}
-		
+		}		
 		@keyframes slideIn {
 			0% {
 				transform: translateY(50px);
@@ -262,7 +223,6 @@
 				opacity: 1;
 			}
 		}
-
 		@keyframes shake {
 			0%, 100% {
 				transform: translateX(0);
@@ -274,9 +234,29 @@
 				transform: translateY(5px);
 			}
 		}
-	}
-
-
+		.audio-icon {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+		.background-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+			pointer-events: none; 
+        }
+		.content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); /* Optional: to improve text readability */
+        }
     </style>
     <script>
         function show(sectionId) {
@@ -299,6 +279,10 @@
                         <source src="./videos/fun/anniversary.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+					<video controls>
+                        <source src="./videos/fun/C0051.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 `;
                 break;
             case 'pics':
@@ -316,11 +300,15 @@
                 contentDiv.innerHTML = '';
         }
     }
+	function playAudio(audioId) {
+            var audio = document.getElementById(audioId);
+            audio.play();
+        }
     </script>
 </head>
 <body>
     <header>
-        <h1>Happy 2nd Anniversary, Kavya & Bhargav!</h1>
+        <h1>Happy 2nd Anniversary Kavya & Bhargav!</h1>
         <p>Celebrating two beautiful years of love and togetherness.</p>
     </header>
     <nav>
@@ -342,15 +330,35 @@
                 <li><strong>Venue Hall:</strong> Mana Kalyana Mandapam</li>
             </ul>
         </div>
-        <div class="pdf-container">
-            <embed src=".\kavya wedding card.pdf" type="application/pdf" width="600" height="800">
-            <div class="overlay"><a href=".\kavya wedding card.pdf" class="open-link" target="_blank">View</a></div>
-        </div>
+		
+<div class="pdf-container">
+    <a href=".\kavya wedding card.pdf" target="_blank">
+        <embed src=".\kavya wedding card.pdf" type="application/pdf" width="600" height="800">
+    </a>
+</div>
+
+
+
+
     </section> 
     <section id="love-story" style="display:none;">
-        <h2>Our Love Story</h2>
-        <p>From the moment we met to the countless memories we've created together...</p>
-        <p>Include the detailed love story here with photos and significant dates.</p>
+        <h2>Love Story</h2>
+        <p>A beautiful journey of cherished moments and unwavering commitment.</p>
+        <p>Short Video about KavyaBhargav's LoveStory</p>
+		<video controls >
+            <source src="./videos/loveStory/intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+		<video autoplay muted loop class="background-video">
+        <source src="./videos/loveStory/background.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+		</video>
+		 <div class="content">
+		<p>
+        "We both met at <span class="audio-icon" onclick="playAudio('audio1')">🔊</span> from that moment, there was an undeniable connection. They instantly bonded over their shared love for books and travel.
+		</p>
+		<audio id="audio1" src="./mazeGame.mp3"></audio>
+		 </div>
     </section>
     <section id="gallery" style="display:none;">
         <h2>Photo Gallery</h2>
@@ -358,6 +366,7 @@
             <img src="D:\Learning\Angular\First\src\assets\IMG_20220820_093721.jpg" alt="Photo 1">
             <img src="D:\Learning\Angular\First\src\assets\IMG_20220820_195441_Bokeh.jpg" alt="Photo 2">
             <img src="D:\Learning\Angular\First\src\assets\IMG_20220820_210238_Bokeh.jpg" alt="Photo 3">
+			<iframe src="./Scrap book/index.html" style="width:100%; height:800px; border:none;"></iframe>
         </div>
     </section>
     <section id="videos" style="display:none;">
@@ -395,17 +404,19 @@
     <!-- JavaScript to create falling symbols -->
     <script>
         function createFallingSymbol() {
-            const symbol = document.createElement('div');
-            symbol.className = 'falling-symbol';
-            symbol.innerHTML = '❤️';
-            symbol.style.left = Math.random() * 100 + 'vw';
-            symbol.style.animationDuration = Math.random() * 5 + 5 + 's';
-            document.body.appendChild(symbol);
-            symbol.addEventListener('animationend', () => {
-                symbol.remove();
+			const symbols = ['❤', '💖', '💕', '💓', '💗', '💝'];
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+            const symbolElement = document.createElement('div');
+            symbolElement.className = 'falling-symbol';
+            symbolElement.innerHTML = symbol;
+            symbolElement.style.left = Math.random() * 100 + 'vw';
+            symbolElement.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.body.appendChild(symbolElement);
+            symbolElement.addEventListener('animationend', () => {
+                symbolElement.remove();
             });
         }
-        setInterval(createFallingSymbol, 600);
+        setInterval(createFallingSymbol, 500);
     </script>
 </body>
 </html>
