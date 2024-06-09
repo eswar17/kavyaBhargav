@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#scrapbook').turn({
-        width: 800,
-        height: 600,
+        width: 680,
+        height: 340,
         autoCenter: true
     });
 
@@ -9,6 +9,7 @@ $(document).ready(function() {
         const totalPages = $('#scrapbook').turn('pages');
 
         $('#prevArrow').css('pointer-events', page <= 1 ? 'none' : 'auto');
+		$('#prevArrow').css('display', page <= 1 ? 'none' : 'block');
         $('#prevArrow').css('color', page <= 1 ? 'grey' : '#007BFF');
         $('#nextArrow').css('pointer-events', page >= totalPages ? 'none' : 'auto');
         $('#nextArrow').css('color', page >= totalPages ? 'grey' : '#007BFF');
