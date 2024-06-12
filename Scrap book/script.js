@@ -14,29 +14,24 @@ $(document).ready(function() {
 				$("video").each(function() {
                     this.pause();
                 });
-				
+				if(page%2==0){
+					var next=page+1;
+					var video = document.querySelector("#page"+page+" video");
+					if (video) {
+                        video.play();
+                    }else if(document.querySelector("#page"+next+" video")){
+						video.play();
+					}
+				}else{
+					var prev=page-1;
+					var video = document.querySelector("#page"+page+" video");
+					if (video) {
+                        video.play();
+                    }else if(document.querySelector("#page"+prev+" video")){
+						document.querySelector("#page"+prev+" video").play();
+					}
+				}
                 // Check if the page contains the video
-                if (page == 12) {
-                    var video = document.querySelector("#page12 video");
-                    if (video) {
-                        video.play();
-                    }
-                }else if (page == 14) {
-                    var video = document.querySelector("#page14 video");
-                    if (video) {
-                        video.play();
-                    }
-                }else if (page == 15) {
-                    var video = document.querySelector("#page14 video");
-                    if (video) {
-                        video.play();
-                    }
-                }else if (page == 13) {
-                    var video = document.querySelector("#page12 video");
-                    if (video) {
-                        video.play();
-                    }
-                }
             }
         }
     });
