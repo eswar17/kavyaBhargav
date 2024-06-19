@@ -114,10 +114,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-function initGame() {
-    musicControl.innerHTML = "Play Music";
-}
-
 function startGame() {
     backgroundMusic.play().catch(error => {
         console.log('Background music play failed:', error);
