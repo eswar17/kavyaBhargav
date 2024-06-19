@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+#scrapbook-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 20px auto;
+	width: 680px;
+    height: 340px;
+}
+
+#scrapbook {
+    width: 100%;
+    height: 340px;
+    margin: 0 auto;
+    /*background-color: orange;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+    position: relative;
+    overflow: hidden;
+	/*background-image: url('../IMG_2109.jpg'); /* Replace with the path to your background image */
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image */
+}
+
+.page {
+    width: 340px;
+    height: 340px;
+    position: relative;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    visibility: visible;
+    background: black;
+	border: 5px solid gold; 
+   /* border: 3px solid white; */
+    box-sizing: border-box;
+}
+
+.page:nth-child(even) {
+    left: 50%;
+}
+
+.page.active {
+    visibility: visible;
+    z-index: 2;
+}
+
+.page p {
+    margin: 0;
+}
+
+#prevArrow, #nextArrow {
+    font-size: 2em;
+    cursor: pointer;
+    color: #007BFF;
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+	opacity:0%;
+	cursor: pointer;
+}
+
+#prevArrow {
+    left: 10px;
+}
+
+#nextArrow {
+    right: 10px;
+}
+
+#prevArrow:disabled, #nextArrow:disabled {
+    color: grey;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.custom-image {
+    width: 340px;
+    height: 340px;
+}
+
+.custom-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hide {
+      display: none;
+}
+
+.hard {
+    background-color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+}
