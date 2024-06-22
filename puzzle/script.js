@@ -1,38 +1,18 @@
 const imageFolderPath = "../PhotoSection/Marriage/Pics/"; // Path to the folder containing images
-let images = []; // Array to store image filenames
+const images = ["Page1.jpg", "Page2.jpg", "Page3.jpg", "Page4.jpg", "Page5.jpg"]; // Manually update this array with your image filenames
 
-function fetchImagesFromFolder(folderPath) {
-    return new Promise((resolve, reject) => {
-        fetch(folderPath)
-            .then((response) => response.text())
-            .then((html) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-                const links = doc.querySelectorAll("a");
-                const filenames = Array.from(links)
-                    .map((link) => link.getAttribute("href"))
-                    .filter((href) => href.endsWith(".jpg") || href.endsWith(".jpeg") || href.endsWith(".png"));
-                resolve(filenames);
-            })
-            .catch((error) => reject(error));
-    });
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 function initPuzzle() {
-    fetchImagesFromFolder(imageFolderPath)
-        .then((filenames) => {
-            if (filenames.length > 0) {
-                images = filenames;
-                startGame();
-            } else {
-                console.error("No images found in the folder.");
-            }
-        })
-        .catch((error) => console.error("Error fetching images:", error));
+    startGame();
 }
 
 function startGame() {
-    // Randomly select an image from the array of image filenames
     const randomIndex = Math.floor(Math.random() * images.length);
     const randomImageSrc = images[randomIndex];
 
@@ -58,7 +38,6 @@ function startGame() {
         container.appendChild(puzzlePiece);
     });
 
-    // Add drag and drop functionality
     let draggedElement = null;
 
     container.addEventListener('dragstart', function (e) {
@@ -95,7 +74,6 @@ function startGame() {
         }
     });
 
-    // Make pieces draggable
     document.querySelectorAll('.puzzle-piece').forEach(piece => {
         piece.setAttribute('draggable', true);
     });
@@ -116,6 +94,7 @@ function checkSolution() {
         document.getElementById('puzzle-container').classList.add('solved');
         document.getElementById('message').innerText = 'Happy Anniversary!';
         document.getElementById('play-again').style.display = 'block';
+        document.getElementById('play-again').style.display = 'inline-block';
     }
 }
 
