@@ -1,0 +1,31 @@
+#puzzle-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 500px; /* Adjust this size according to your image */
+    height: 500px; /* Adjust this size according to your image */
+    border: 5px solid transparent;
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+.puzzle-piece {
+    width: 100%;
+    height: 100%;
+    background-size: 500px 500px; /* Adjust these sizes according to your image */
+    background-image: url('../PhotoSection/Marriage/Pics/Page1.jpg'); /* Path to your image */
+    cursor: pointer;
+}
+
+#message-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#puzzle-container.solved {
+    border: 5px solid gold;
+    box-shadow: 0 0 10px gold;
+}
+
+#play-again{	
+    align-items: center;
+}
