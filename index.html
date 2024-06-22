@@ -177,13 +177,13 @@
             text-decoration: none; /* Remove default underline */
             cursor: pointer; /* Show pointer cursor on hover */
         }
-		.menu {
+		.menu, .subMenu {
 			list-style: none;
 			padding: 0;
 			display: flex;
 			justify-content: center;
 		}
-		.menu li {
+		.menu li, .subMenu li {
 			margin: 10px;
 			transform: translateY(50px);
 			opacity: 0;
@@ -192,7 +192,7 @@
 		.menu li:nth-child(1) { animation-delay: 0.2s; }
 		.menu li:nth-child(2) { animation-delay: 0.4s; }
 		.menu li:nth-child(3) { animation-delay: 0.6s; }
-		.menu li a {
+		.menu li a, .subMenu li a {
 			text-decoration: none;
 			color: #fff;
 			font-weight: bold;
@@ -203,7 +203,7 @@
 			position: relative; /* Needed for z-index to work */
 			overflow: hidden; /* Hide overflow of pseudo-element */
 		}
-		.menu li:hover a::before {
+		.menu li:hover a::before, .subMenu li:hover a::before {
 			content: "";
 			position: absolute;
 			top: 0;
@@ -213,6 +213,12 @@
 			background-color: #15ba65;
 			z-index: -1;
 			animation: shake 1s; /* Apply shake animation */
+		}
+		.subMenu li a  {
+		  background-color: #008000;
+		}
+		.subMenu li:hover a::before {
+		  background-color: #008000;
 		}		
 		@keyframes slideIn {
 			0% {
@@ -279,15 +285,35 @@
                 `;
                 break;
             case 'games':
-                contentDiv.innerHTML = `
-                    <iframe src="./maze game/index.html" style="width:100%; height:800px; border:none;"></iframe>
-                `;
+				contentDiv.innerHTML =`
+					<ul class="subMenu">
+						<li><a href="#" onclick="showGame('maze')">Maze</a></li>
+						<li><a href="#" onclick="showGame('puzzle')">Puzzle</a></li>
+					</ul>
+				`;
                 break;
             default:
                 // For any other content type, keep the div empty
                 contentDiv.innerHTML = '';
         }
     }
+	function showGame(gameType) {
+    var contentDiv = document.getElementById('content');
+    switch (gameType) {
+        case 'maze':
+            contentDiv.innerHTML = `
+                <iframe src="./maze game/index.html" style="width:100%; height:800px; border:none;"></iframe>
+            `;
+            break;
+        case 'puzzle':
+            contentDiv.innerHTML = `
+                <iframe src="./puzzle/index.html" style="width:100%; height:800px; border:none;"></iframe>
+            `;
+            break;
+        default:
+            contentDiv.innerHTML = '';
+    }
+}
 	function showPicsContent(contentType) {
         var contentDiv = document.getElementById('picsContent');
         switch (contentType) {
