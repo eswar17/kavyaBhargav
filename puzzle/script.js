@@ -1,11 +1,41 @@
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+const imageFolderPath = "../PhotoSection/Marriage/Pics/"; // Path to the folder containing images
+let images = []; // Array to store image filenames
+
+function fetchImagesFromFolder(folderPath) {
+    return new Promise((resolve, reject) => {
+        fetch(folderPath)
+            .then((response) => response.text())
+            .then((html) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                const links = doc.querySelectorAll("a");
+                const filenames = Array.from(links)
+                    .map((link) => link.getAttribute("href"))
+                    .filter((href) => href.endsWith(".jpg") || href.endsWith(".jpeg") || href.endsWith(".png"));
+                resolve(filenames);
+            })
+            .catch((error) => reject(error));
+    });
 }
 
 function initPuzzle() {
+    fetchImagesFromFolder(imageFolderPath)
+        .then((filenames) => {
+            if (filenames.length > 0) {
+                images = filenames;
+                startGame();
+            } else {
+                console.error("No images found in the folder.");
+            }
+        })
+        .catch((error) => console.error("Error fetching images:", error));
+}
+
+function startGame() {
+    // Randomly select an image from the array of image filenames
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const randomImageSrc = images[randomIndex];
+
     const container = document.getElementById('puzzle-container');
     container.innerHTML = ''; // Clear existing pieces
     container.classList.remove('solved');
@@ -14,7 +44,7 @@ function initPuzzle() {
 
     const positions = [];
     for (let i = 0; i < 25; i++) {
-        positions.push({x: i % 5, y: Math.floor(i / 5)});
+        positions.push({ x: i % 5, y: Math.floor(i / 5) });
     }
 
     shuffle(positions);
@@ -22,6 +52,7 @@ function initPuzzle() {
     positions.forEach((pos, i) => {
         const puzzlePiece = document.createElement('div');
         puzzlePiece.classList.add('puzzle-piece');
+        puzzlePiece.style.backgroundImage = `url('${imageFolderPath}${randomImageSrc}')`;
         puzzlePiece.style.backgroundPosition = `-${pos.x * 100}px -${pos.y * 100}px`;
         puzzlePiece.setAttribute('data-position', `${pos.x}-${pos.y}`);
         container.appendChild(puzzlePiece);
@@ -85,8 +116,9 @@ function checkSolution() {
         document.getElementById('puzzle-container').classList.add('solved');
         document.getElementById('message').innerText = 'Happy Anniversary!';
         document.getElementById('play-again').style.display = 'block';
-        document.getElementById('play-again').style.display = 'inline-block';
     }
 }
+
+document.getElementById('play-again').addEventListener('click', startGame);
 
 document.addEventListener('DOMContentLoaded', initPuzzle);
