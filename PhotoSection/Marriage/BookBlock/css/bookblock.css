@@ -1,6 +1,6 @@
 .bb-bookblock {
-	width: 400px;
-	height: 300px;
+	width: 760px;
+	height: 280px;
 	margin: 0 auto;
 	position: relative;
 	z-index: 100;
@@ -162,8 +162,8 @@
 }
 
 .bb-item {
-	width: 400px;
-	height: 310px;
+	width: 760px;
+	height: 280px;
 	position: absolute;
 	top: 0;
 	left: 0;
