@@ -1,5 +1,5 @@
 const imageFolderPath = "../PhotoSection/Marriage/Pics/"; // Path to the folder containing images
-const images = ["Page1.jpg", "Page2.jpg", "Page3.jpg", "Page4.jpg", "Page5.jpg"]; // Manually update this array with your image filenames
+const images = ["puzzle5.jpg","puzzle4.jpg","puzzle3.jpg","puzzle4.jpg","puzzle5.jpg"]; // Manually update this array with your image filenames
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -95,6 +95,7 @@ function checkSolution() {
         document.getElementById('message').innerText = 'Happy Anniversary!';
         document.getElementById('play-again').style.display = 'block';
         document.getElementById('play-again').style.display = 'inline-block';
+		document.getElementById('puzzle-container').style.gap='0px';
     }
 }
 

@@ -1,7 +1,7 @@
 #puzzle-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    gap: 4px;
     width: 500px; /* Adjust this size according to your image */
     height: 500px; /* Adjust this size according to your image */
     border: 5px solid transparent;
