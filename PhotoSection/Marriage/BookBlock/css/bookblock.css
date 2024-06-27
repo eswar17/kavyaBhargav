@@ -169,6 +169,7 @@
 	left: 0;
 	display: none;
 	background: #fff;
+	border: 3px groove gold;
 }
 
 .bb-item img {
