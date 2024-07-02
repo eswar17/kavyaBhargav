@@ -63,8 +63,10 @@ const checkMeet = () => {
         
         // Change characters to heart symbol
         if (!isMeeting) {
-            bride.innerHTML = '❤️';
-            groom.innerHTML = '❤️';
+            bride.innerHTML = '💓';
+            groom.innerHTML = '';
+            bride.style.backgroundImage = "none";  // Set background image to none for bride
+            groom.style.backgroundImage = "none";  // Set background image to none for groom
             isMeeting = true;
         }
     } else {
