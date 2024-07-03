@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#selectionScreen, #gameArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#codeInput {
+    margin-top: 20px;
+}
+
+#gameArea {
+    position: relative;
+    width: 680px;
+    height: 680px;
+    background-color: #e0e0e0;
+    border: 2px solid #000;
+}
+
+.character {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+
+#bride {
+    background-image: url('bride.png'); /* Add your bride image */
+    left: 5px;
+    top: 53px;
+	width: 25.5px; 
+	height: 25.5px;
+}
+
+#groom {
+    background-image: url('groom.png'); /* Add your groom image */
+    right: 53px;
+    bottom: 5px;
+	width: 24px; 
+	height: 24px;
+}
+
+.grass {
+    position: absolute;
+    background-image: url('grass.png');
+    background-size: cover;
+}
+
+#musicControl {
+    position: absolute;
+    bottom: 40px; /* Adjust as needed */
+    left: 50%; /* Aligns the button horizontally at the center */
+    transform: translateX(-50%); /* Center the button horizontally */
+	opacity: 0.5;
+}
+
+#timer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
