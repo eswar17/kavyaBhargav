@@ -21,6 +21,7 @@ function startGame() {
     container.classList.remove('solved');
     document.getElementById('message').innerText = '';
     document.getElementById('play-again').style.display = 'none';
+	document.getElementById('puzzle-container').style.gap='4px';
 
     const positions = [];
     for (let i = 0; i < 25; i++) {
