@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
 		<!-- custom demo style -->
 		<link rel="stylesheet" type="text/css" href="css/demo1.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="js/modernizr.custom.js"></script>
 	</head>
 	<body>
@@ -135,6 +136,7 @@
 					<nav>
 						<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
 						<a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+						<a id="bb-nav-play-pause" href="#" class="bb-custom-icon bb-custom-icon-play-pause">Play</a>
 						<a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
 						<a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a>
 					</nav>
@@ -152,8 +154,11 @@
 						$navNext : $( '#bb-nav-next' ),
 						$navPrev : $( '#bb-nav-prev' ),
 						$navFirst : $( '#bb-nav-first' ),
-						$navLast : $( '#bb-nav-last' )
+						$navLast : $( '#bb-nav-last' ),
+						$navPlayPause : $( '#bb-nav-play-pause' )
 					},
+					interval,
+					isPlaying = false,
 					init = function() {
 						config.$bookBlock.bookblock( {
 							speed : 800,
@@ -186,6 +191,24 @@
 							config.$bookBlock.bookblock( 'last' );
 							return false;
 						} );
+
+						config.$navPlayPause.on( 'click touchstart', function() {
+							if (isPlaying) {
+								clearInterval(interval);
+								config.$navPlayPause
+									.removeClass('bb-custom-icon-pause')
+									.addClass('bb-custom-icon-play-pause');
+							} else {
+								interval = setInterval(function() {
+									config.$bookBlock.bookblock('next');
+								}, 3500);
+								config.$navPlayPause
+									.removeClass('bb-custom-icon-play-pause')
+									.addClass('bb-custom-icon-pause');
+							}
+							isPlaying = !isPlaying;
+							return false;
+						});
 						
 						// add swipe events
 						$slides.on( {
