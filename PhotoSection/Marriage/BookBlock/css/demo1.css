@@ -36,8 +36,6 @@
 	height: 30px;
 	text-align: center;
 	border-radius: 2px;
-	background: #72b890;
-	color: #fff;
 	font-size: 0;
 	margin: 2px;
 }
@@ -60,20 +58,28 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-.bb-custom-icon-first:before,
-.bb-custom-icon-last:before {
-	content: "\e002";
-}
-
-.bb-custom-icon-arrow-left:before,
-.bb-custom-icon-arrow-right:before {
-	content: "\e003";
-}
-
-.bb-custom-icon-arrow-left:before,
 .bb-custom-icon-first:before {
-	-webkit-transform: rotate(180deg);
-	transform: rotate(180deg);
+	content: "⏮️";
+}
+
+.bb-custom-icon-arrow-left:before{
+	content: "⬅️";
+}
+
+.bb-custom-icon-play-pause:before {
+    content: "▶️";
+}
+
+.bb-custom-icon-pause:before {
+    content: "⏸️";
+}
+
+.bb-custom-icon-arrow-right:before {
+    content: "➡️";
+}
+
+.bb-custom-icon-last:before {
+    content: "⏭️";
 }
 
 /* No JS */
