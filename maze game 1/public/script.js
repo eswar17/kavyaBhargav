@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io('http://34.125.134.191:3000');
 
 let playerType = null;
 let gameCode = null;
