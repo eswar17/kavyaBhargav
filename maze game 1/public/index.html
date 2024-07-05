@@ -8,13 +8,32 @@
 </head>
 <body>
     <div id="selectionScreen">
-        <button id="selectBride">Play as Bride</button>
-        <button id="selectGroom">Play as Groom</button>
+        <div><button class="cssButton" id="selectBride">Play as Bride</button>
+		<p></p>
+        <button class="cssButton" id="selectGroom">Play as Groom</button></div>
     </div>
-    <div id="codeInput" style="display:none;">
+	
+	<div id="codeGeneration" style="display:none;">
+		<div id="generateCodePanel">
+			<p>Generate a 4-digit code:</p>
+			<button class="cssButton" id="generateCodeBtn">Generate Code</button>
+		</div>
+		<div id="enterCodePanel">
+			<p>Enter code:</p>
+			<button class="cssButton" id="enterCodeBtn">Enter Code</button>
+		</div>
+	</div>
+	<div>
+    <div id="codeAccept1" style="display:none;">
+		<div id="codeGenerated"></div>
+    </div>
+	
+    <div id="codeAccept2" style="display:none;">
         <input type="text" id="code" placeholder="Enter 4-digit code">
-        <button id="startGame">Start Game</button>
     </div>
+	
+	<div id="codeInput" style="display:none;"><button class="cssButton" id="startGame">Start Game</button></div>
+	</div>
     <div id="gameArea" style="display:none;">
         <div id="bride" class="character"></div>
         <div id="groom" class="character"></div>
@@ -79,7 +98,15 @@
 		<div class="grass" style="top: 493px; left: 323px; width:  34px; height: 102px;"></div>
         <div id="timer">Time: 00:00</div>
     </div>
-    <script src="socket.io.js"></script>
-    <script src="script.js"></script>
+	
+	<button id="musicControl" onclick="toggleMusic()"></button>
+
+    <audio id="backgroundMusic" loop>
+        <source src="../../audio/mazeGame/mazeGame.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+	
+	<script src="http://34.125.134.191:3000/socket.io/socket.io.js"></script>
+    <script src="script2.js"></script>
 </body>
 </html>
