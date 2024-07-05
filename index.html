@@ -286,7 +286,7 @@
 				contentDiv.innerHTML =`
 					<ul class="subMenu">
 					<li><a href="#" onclick="showGame('maze')">Maze</a></li>
-     					<li><a href="http://34.125.134.191:3000/" target="_blank">RealMaze</a></li>
+     					<li><a href="http://34.125.134.191:3000/" target="_blank">MultiPlayerMaze</a></li>
 					<li><a href="#" onclick="showGame('puzzle')">Puzzle</a></li>
 					<li><a href="#" onclick="showGame('memoryGame')">Memory Game</a></li>
 					</ul>
@@ -302,7 +302,7 @@
 			switch (gameType) {
 				case 'maze':
 					contentDiv.innerHTML = `
-						<iframe src="http://34.125.134.191:3000/" style="width:100%; height:800px; border:none;"></iframe>
+						<iframe src="./maze game/index.html" style="width:100%; height:800px; border:none;"></iframe>
 					`;
 					break;
 				case 'puzzle':
