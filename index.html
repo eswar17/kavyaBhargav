@@ -151,9 +151,27 @@
          .pdf-container embed {
 			width: 340px;
 			height: 245px;
-			border: 3px solid gold;
 			pointer-events: none; /* Prevent interaction with the embed element itself */
          }
+.pdf-border-box {
+  border: 5px solid transparent;
+  transition: border-image 0.25s;
+}
+
+.border-box {
+  border: 5px solid transparent;
+  transition: border-color 0.5s, box-shadow 0.5s;
+}
+
+.border-box.lights-on {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.border-box.lights-off {
+  border-color: #4440;
+  box-shadow: 0 0 10px #4440;
+}
          .popup {
 			position: fixed;
 			top: 0;
@@ -366,7 +384,7 @@
          <a href="#videos" data-emoji="🎥" onclick="return show('videos');">Video Messages</a>
          <a href="#fun" data-emoji="🎉" onclick="return show('fun');">Fun</a>
       </nav>
-      <section id="bhaavyam">
+      <section id="bhaavyam" class="border-box" >
          <h2>Bhaavyam - The Sacred Union of Two Souls.</h2>
          <div>
             <h3>Marriage</h3>
@@ -380,11 +398,11 @@
          </div>
          <div class="pdf-container">
             <a href=".\wedding card.pdf" target="_blank">
-               <embed src=".\weddingCard.pdf" type="application/pdf" width="600" height="800">
+               <embed src=".\weddingCard.pdf" type="application/pdf" class="pdf-border-box" id="pdfBorderBox" width="600" height="800">
             </a>
          </div>
       </section>
-      <section id="love-story" style="display:none;">
+      <section id="love-story" style="display:none;"  class="border-box" >
          <h2>Love Story</h2>
          <p>A beautiful journey of cherished moments and unwavering commitment.</p>
          <p>Short Video about KavyaBhargav's LoveStory</p>
@@ -398,7 +416,7 @@
          </video>
          <iframe src="./loveStory/index.html" style="width:100%; height:680px; border:none;"></iframe>
       </section>
-      <section id="gallery" style="display:none;">
+      <section id="gallery" style="display:none;"  class="border-box" >
          <h2>Photo Gallery</h2>
          <ul class="menu">
             <!-- <li><a href="#" onclick="showPicsContent('PreWed')">PreWed</a></li> -->
@@ -410,7 +428,7 @@
          <div id="picsContent">
          </div>
       </section>
-      <section id="videos" style="display:none;">
+      <section id="videos" style="display:none;"  class="border-box" >
          <h2>Video Messages</h2>
          <p>Watch messages from friends and family.</p>
          <video controls>
@@ -430,7 +448,7 @@
             Your browser does not support the video tag.
          </video>
       </section>
-      <section id="fun" style="display:none;">
+      <section id="fun" style="display:none;"  class="border-box" >
          <h2>Let's Have Some Fun!</h2>
          <p>Choose what you want to see:</p>
          <ul class="menu">
@@ -443,22 +461,81 @@
          </div>
       </section>
       <!-- JavaScript to create falling symbols -->
-      <script>
-         function createFallingSymbol() {
-         const symbols = ['❤', '💖', '💕', '💓', '💗', '💝'];
-             const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-             const symbolElement = document.createElement('div');
-             symbolElement.className = 'falling-symbol';
-             symbolElement.innerHTML = symbol;
-             symbolElement.style.left = Math.random() * 100 + 'vw';
-             symbolElement.style.animationDuration = Math.random() * 5 + 5 + 's';
-			 symbolElement.style.pointerEvents = 'none';
-             document.body.appendChild(symbolElement);
-             symbolElement.addEventListener('animationend', () => {
-                 symbolElement.remove();
-             });
-         }
-         setInterval(createFallingSymbol, 500);
-      </script>
+	  <script>
+	  	document.addEventListener('DOMContentLoaded', () => {
+	  	function createFallingSymbol() {
+	  		const symbols = ['❤', '💖', '💕', '💓', '💗', '💝'];
+	  		const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+	  		const symbolElement = document.createElement('div');
+	  		symbolElement.className = 'falling-symbol';
+	  		symbolElement.innerHTML = symbol;
+	  		symbolElement.style.left = Math.random() * 100 + 'vw';
+	  		symbolElement.style.animationDuration = Math.random() * 5 + 5 + 's';
+	  		symbolElement.style.pointerEvents = 'none';
+	  		document.body.appendChild(symbolElement);
+	  		symbolElement.addEventListener('animationend', () => {
+	  		symbolElement.remove();
+	  		});
+	  	}
+	  
+	  	setInterval(createFallingSymbol, 500);
+	  
+	    const pdfBorderBox = document.getElementById('pdfBorderBox');
+	  	const borderBox1 = document.getElementById('bhaavyam');
+		const borderBox2 = document.getElementById('love-story');
+		const borderBox3 = document.getElementById('videos');
+		const borderBox4 = document.getElementById('fun');
+		const borderBox5 = document.getElementById('gallery');
+
+  // Define the colors for the border
+  const colors = ['#FF5733', '#33FF57', '#3357FF', '#F333FF', '#FFFB33'];
+
+  // Function to create the gradient string
+  const createGradient = (colors) => {
+    return `linear-gradient(to right, ${colors.join(', ')})`;
+  };
+
+  // Function to rotate the colors array
+  const rotateColors = (colors) => {
+    colors.push(colors.shift());
+  };
+
+  // Function to update the border gradient
+  const updateBorderGradient = () => {
+    rotateColors(colors);
+    pdfBorderBox.style.borderImage = `${createGradient(colors)} 1`;
+  };
+
+  // Initialize the border gradient
+ pdfBorderBox.style.borderImage = `${createGradient(colors)} 1`;
+
+  // Rotate the colors every 0.25 seconds
+  setInterval(updateBorderGradient, 250);
+
+  // Set initial state
+  borderBox1.classList.add('lights-off');
+  borderBox2.classList.add('lights-off');
+  borderBox3.classList.add('lights-off');
+  borderBox4.classList.add('lights-off');
+  borderBox5.classList.add('lights-off');
+
+  // Function to toggle lights
+  const toggleLights = () => {
+    borderBox1.classList.toggle('lights-on');
+    borderBox1.classList.toggle('lights-off');
+    borderBox2.classList.toggle('lights-on');
+    borderBox2.classList.toggle('lights-off');
+    borderBox3.classList.toggle('lights-on');
+    borderBox3.classList.toggle('lights-off');
+    borderBox4.classList.toggle('lights-on');
+    borderBox4.classList.toggle('lights-off');
+    borderBox5.classList.toggle('lights-on');
+    borderBox5.classList.toggle('lights-off');
+  };
+
+  // Toggle lights every 2 seconds
+  setInterval(toggleLights, 500);
+	  	});
+	  </script>
    </body>
 </html>
