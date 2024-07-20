@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appium Command Prompt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: white;
+        }
+        .container {
+            text-align: center;
+        }
+        .cmd {
+            background-color: black;
+            color: white;
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            width: 749px;
+            height: 330px;
+			border: 1px solid white;
+        }
+        .input-area {
+            margin-top: 10px;
+        }
+        .output {
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+        .prompt {
+            display: flex;
+            align-items: center;
+        }
+        .prompt span {
+            margin-right: 5px;
+        }
+        input[type="text"] {
+            background: none;
+            border: none;
+            color: white;
+            outline: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="appiumBtn">Appium</button>
+        <div id="cmd" class="cmd">
+			<img class="cmdImg" src="cmd.png" alt="Command Prompt Image">
+            <div class="input-area">
+                <div class="prompt">
+                    <span>C:\users\StartAppium&gt;</span>
+                    <input type="text" id="cmdInput" placeholder="">
+                </div>
+            </div>
+            <div id="output" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('appiumBtn').addEventListener('click', () => {
+            document.getElementById('cmd').style.display = 'block';
+            document.getElementById('cmdInput').focus();
+			document.getElementById('appiumBtn').style.display = 'none';
+        });
+
+        document.getElementById('cmdInput').addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                const input = event.target.value.trim();
+                const output = document.getElementById('output');
+                output.innerHTML = ''; // Clear previous output
+                if (input === 'appium') {
+                    simulateProgress(output, () => {
+                        typeWriter(output, '\nYou are lucky to have Eswar as a friend\nConsider yourself fortunate\nYou must have done something really good \nin a past life to deserve Eswar as your friend!\nHaving Eswar as a friend is like \nwinning the friendship lottery\nYou’re lucky to have Eswar \nwho else would put up with your nonsense and still love you?\nAppium is started successfully\nSimulator will launch in 3...2...1');
+                    });
+                } else {
+                    typeWriter(output, 'Wrong input');
+                }
+            }
+        });
+
+        function typeWriter(element, text, callback = null, index = 0) {
+            if (index < text.length) {
+                element.innerHTML += text.charAt(index);
+                setTimeout(() => typeWriter(element, text, callback, index + 1), 30);
+            } else if (callback) {
+                callback();
+            }
+        }
+
+        function simulateProgress(element, callback) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress = Math.min(progress + Math.floor(Math.random() * 5) + 1, 100);
+                element.innerHTML = `Compiling Resources ${progress}/100`;
+                if (progress === 100) {
+                    clearInterval(interval);
+                    setTimeout(callback, 500); // Allow some time before showing the next message
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

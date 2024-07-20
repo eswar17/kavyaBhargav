@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rotating Mobile with Clickable Icons</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        #container {
+            perspective: 1000px;
+        }
+        #mobile {
+            width: 550px; /* Adjusted for better display */
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        #mobile img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            z-index: 1;
+        }
+        .icon {
+    position: absolute;
+    width: 36px;
+    height: 34px;
+    cursor: pointer;
+    z-index: 2;
+	border-radius: 7px;
+}
+
+        .smallIcon {
+position: absolute;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    z-index: 2;
+}
+		.home { top: 50px; left: 366px; }
+        .settings { top: 179px; left: 340px; }
+        .photos { top: 125px; left: 232px; }
+        .maps { top: 125px; left: 286px; }
+		.bgmi {     top: 179px;
+    left: 233px;
+    width: 39px;
+    cursor: pointer;
+    z-index: 2;
+    background-image: url(bgmi.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+		}
+		
+		
+        #video {
+                display: none;
+				position: absolute;
+				top: 200px;
+				left: 38px;
+				width: 477px;
+				height: 243px;
+				z-index: 3;
+				object-fit: cover;
+				border-radius: 30px;
+				overflow: hidden;
+				transform: rotate(90deg);
+				object-fit: fill;
+        }
+		
+		
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="mobile">
+            <img class="front" src="front.jpg" alt="Front">
+
+            <!-- Clickable icons overlay -->
+            <div class="icon settings" onclick="handleIconClick('settings')"></div>
+            <div class="icon photos" onclick="handleIconClick('photos')"></div>
+            <div class="icon maps" onclick="handleIconClick('maps')"></div>
+            <div class="icon bgmi" onclick="rotateAndPlayVideo()"></div>
+			<div class="smallIcon home" onclick="refresh()"></div>
+			<video id="video">
+                <source src="bgmiVideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        function handleIconClick(iconName) {
+            alert('Clicked on ' + iconName);
+        }
+        function rotateLandscape() {
+            document.getElementById('mobile').style.transform = 'rotate(-90deg)';
+        }
+		function refresh() {
+            location.reload();
+        }
+		function rotateAndPlayVideo() {
+    const mobile = document.getElementById('mobile');
+    const video = document.getElementById('video');
+    
+    mobile.style.transform = 'rotate(-90deg)';
+
+    setTimeout(() => {
+        video.style.display = 'block';
+        video.play();
+        // Rotate back to 0 degrees and hide video after it ends
+        video.addEventListener('ended', () => {
+            mobile.style.transform = 'rotate(0deg)';
+            video.style.display = 'none';
+        }); 
+    }, 1000); // Wait for the rotation to complete before showing the video 
+}
+    </script>
+    </script>
+</body>
+</html>
