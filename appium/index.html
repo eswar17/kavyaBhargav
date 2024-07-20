@@ -78,36 +78,43 @@
                 const input = event.target.value.trim();
                 const output = document.getElementById('output');
                 output.innerHTML = ''; // Clear previous output
-                if (input === 'appium') {
-                    simulateProgress(output, () => {
-                        typeWriter(output, '\nYou are lucky to have Eswar as a friend\nConsider yourself fortunate\nYou must have done something really good \nin a past life to deserve Eswar as your friend!\nHaving Eswar as a friend is like \nwinning the friendship lottery\nYou’re lucky to have Eswar \nwho else would put up with your nonsense and still love you?\nAppium is started successfully\nSimulator will launch in 3...2...1');
-                    });
-                } else {
-                    typeWriter(output, 'Wrong input');
-                }
+               if (input === 'appium') {
+    simulateProgress(output, () => {
+        typeWriter(output, '\nYou are lucky to have Eswar as a friend\nConsider yourself fortunate\nYou must have done something really good \nin a past life to deserve Eswar as your friend!\nHaving Eswar as a friend is like \nwinning the friendship lottery\nYou’re lucky to have Eswar \nwho else would put up with your nonsense and still love you?\nAppium is started successfully\nSimulator will launch in 5.....4....3...2..1.', () => {
+            document.querySelector('.container').style.display = 'none';
+			window.location.href = 'index2.html';
+        });
+    });
+} else {
+    typeWriter(output, 'Wrong input');
+}
+
             }
         });
 
-        function typeWriter(element, text, callback = null, index = 0) {
-            if (index < text.length) {
-                element.innerHTML += text.charAt(index);
-                setTimeout(() => typeWriter(element, text, callback, index + 1), 30);
-            } else if (callback) {
-                callback();
-            }
-        }
+function typeWriter(element, text, callback = null, index = 0) {
+    if (index < text.length) {
+        element.innerHTML += text.charAt(index);
+        setTimeout(() => typeWriter(element, text, callback, index + 1), 30);
+    } else if (callback) {
+        callback();
+    }
+}
+
+
 
         function simulateProgress(element, callback) {
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress = Math.min(progress + Math.floor(Math.random() * 5) + 1, 100);
-                element.innerHTML = `Compiling Resources ${progress}/100`;
-                if (progress === 100) {
-                    clearInterval(interval);
-                    setTimeout(callback, 500); // Allow some time before showing the next message
-                }
-            }, 100);
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress = Math.min(progress + Math.floor(Math.random() * 5) + 1, 100);
+        element.innerHTML = `Compiling Resources ${progress}/100`;
+        if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(callback, 500); // Allow some time before showing the next message
         }
+    }, 100);
+}
+
     </script>
 </body>
 </html>
