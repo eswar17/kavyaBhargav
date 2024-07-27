@@ -70,7 +70,7 @@
 			object-fit: fill;
         }
 		
-		#image, #camera {
+		#image {
             display: none;
             position: absolute;
             top: 84px;  /* Adjust to position the video from the top */
@@ -84,6 +84,19 @@
 			object-fit: fill;
         }
 		
+		 #camera {
+            display: block;
+            position: absolute;
+            top: 84px;  /* Adjust to position the video from the top */
+			left: 157px;  /* Adjust to position the video from the left */
+			width: 240px;  /* Adjust the width of the video */
+			height: 475px;  /* Adjust the height of the video */
+            z-index: 3;
+            object-fit: cover; 
+			border-radius: 20px; /* Adjust the border-radius for curved edges */
+			overflow: hidden; /* Ensure the video does not overflow the curved edges */
+			object-fit: fill;
+        }
 		
     </style>
 </head>
