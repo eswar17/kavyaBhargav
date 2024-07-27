@@ -127,21 +127,28 @@
         function rotateLandscape() {
             document.getElementById('mobile').style.transform = 'rotate(-90deg)';
         }
-        function openCamera() {
-			const mobile = document.getElementById('mobile');
+		
+		function openCamera() {
 			const camera = document.getElementById('camera');
 			camera.style.display = 'block';
-            
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => {
-                    camera.srcObject = stream;
-                })
-                .catch(err => {
-                    console.error("Error accessing the camera: ", err);
-                    alert('Error accessing the camera: ' + err.message); // Display error message to user
-					location.reload();
-                });
-        }
+		
+			const constraints = {
+				video: {
+					facingMode: "environment" // Use back camera by default on mobile
+				}
+			};
+		
+			navigator.mediaDevices.getUserMedia(constraints)
+				.then(stream => {
+					camera.srcObject = stream;
+				})
+				.catch(err => {
+					console.error("Error accessing the camera: ", err);
+					alert('Error accessing the camera: ' + err.message);
+					location.reload(); // Optional: Reload the page on error
+				});
+		}
+
 		function refresh() {
             location.reload();
         }
