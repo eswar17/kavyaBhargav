@@ -48,6 +48,7 @@
 		
 		.home { top: 50px; left: 366px; }
 		.rotate { top: 50px; left: 386px; }
+		.camera { top: 50px; left: 346px; }
 		.photos { top: 125px; left: 232px; }
         .maps { top: 125px; left: 286px; }
         .settings { top: 179px; left: 340px; }
@@ -69,7 +70,7 @@
 			object-fit: fill;
         }
 		
-		#image {
+		#image, #camera {
             display: none;
             position: absolute;
             top: 84px;  /* Adjust to position the video from the top */
@@ -98,10 +99,12 @@
 			<div class="icon bgmi" onclick="rotateAndPlayVideo()"><img src="bgmi-modified.png" alt="bgmi Icon" style="width: 100%; height: 100%;"></div>
 			<div class="smallIcon home" onclick="refresh()"></div>
 			<div class="smallIcon rotate" onclick="rotate()"></div>
+			<div class="smallIcon camera" onclick="openCamera()"></div>
 			<video id="video">
                 <source src="bgmiFinal.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+			<video id="camera" autoplay></video>
 			<img id="image" src="kb.jpg" alt="Mobile Image">
         </div>
     </div>
@@ -113,6 +116,19 @@
         }
         function rotateLandscape() {
             document.getElementById('mobile').style.transform = 'rotate(-90deg)';
+        }
+        function openCamera() {
+			const mobile = document.getElementById('mobile');
+			const camera = document.getElementById('camera');
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    camera.srcObject = stream;
+                })
+                .catch(err => {
+                    console.error("Error accessing the camera: ", err);
+                    alert('Error accessing the camera: ' + err.message); // Display error message to user
+                });
         }
 		function refresh() {
             location.reload();
