@@ -21,7 +21,6 @@
         .cmd {
             background-color: black;
             color: white;
-            display: none;
             margin-top: 20px;
             text-align: left;
             width: 749px;
@@ -53,13 +52,12 @@
 </head>
 <body>
     <div class="container">
-        <button id="appiumBtn">Appium</button>
         <div id="cmd" class="cmd">
 			<img class="cmdImg" src="cmd.png" alt="Command Prompt Image">
             <div class="input-area">
                 <div class="prompt">
                     <span>C:\users\StartAppium&gt;</span>
-                    <input type="text" id="cmdInput" placeholder="">
+                    <input type="text" id="cmdInput" placeholder="" autocomplete="off">
                 </div>
             </div>
             <div id="output" class="output"></div>
@@ -67,15 +65,13 @@
     </div>
 
     <script>
-        document.getElementById('appiumBtn').addEventListener('click', () => {
-            document.getElementById('cmd').style.display = 'block';
+        document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cmdInput').focus();
-			document.getElementById('appiumBtn').style.display = 'none';
         });
 
         document.getElementById('cmdInput').addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
-                const input = event.target.value.trim();
+                const input = event.target.value.trim().toLowerCase();
                 const output = document.getElementById('output');
                 output.innerHTML = ''; // Clear previous output
                if (input === 'appium') {
