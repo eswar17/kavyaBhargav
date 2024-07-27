@@ -46,6 +46,16 @@
 			z-index: 2;
 		}
 		
+		.static-image {
+			position: absolute;
+			width: 90px;
+			height: 17px;
+			top: 89px;
+			left: 235px;
+			z-index: 3; /* Ensure it’s on top of other content if needed */
+			border-radius: 20px;
+		}
+		
 		.home { top: 50px; left: 366px; }
 		.rotate { top: 50px; left: 386px; }
 		.camera { top: 50px; left: 346px; }
@@ -70,22 +80,8 @@
 			object-fit: fill;
         }
 		
-		#image {
+		#image,#camera  {
             display: none;
-            position: absolute;
-            top: 84px;  /* Adjust to position the video from the top */
-			left: 157px;  /* Adjust to position the video from the left */
-			width: 240px;  /* Adjust the width of the video */
-			height: 475px;  /* Adjust the height of the video */
-            z-index: 3;
-            object-fit: cover; 
-			border-radius: 20px; /* Adjust the border-radius for curved edges */
-			overflow: hidden; /* Ensure the video does not overflow the curved edges */
-			object-fit: fill;
-        }
-		
-		 #camera {
-            display: block;
             position: absolute;
             top: 84px;  /* Adjust to position the video from the top */
 			left: 157px;  /* Adjust to position the video from the left */
@@ -119,6 +115,7 @@
             </video>
 			<video id="camera" autoplay></video>
 			<img id="image" src="kb.jpg" alt="Mobile Image">
+			<img src="mobileFrontBlock.jpg" alt="block" class="static-image">
         </div>
     </div>
 
@@ -133,6 +130,7 @@
         function openCamera() {
 			const mobile = document.getElementById('mobile');
 			const camera = document.getElementById('camera');
+			camera.style.display = 'block';
             
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(stream => {
@@ -141,6 +139,7 @@
                 .catch(err => {
                     console.error("Error accessing the camera: ", err);
                     alert('Error accessing the camera: ' + err.message); // Display error message to user
+					location.reload();
                 });
         }
 		function refresh() {
