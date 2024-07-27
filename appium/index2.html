@@ -63,6 +63,7 @@
         .maps { top: 125px; left: 286px; }
         .settings { top: 179px; left: 340px; }
         .bgmi { top: 179px; left: 232px; }
+		.news { top: 179px; left: 178px; }
 		
         		
         #video {
@@ -80,7 +81,7 @@
 			object-fit: fill;
         }
 		
-		#image,#camera  {
+		.image,#camera  {
             display: none;
             position: absolute;
             top: 84px;  /* Adjust to position the video from the top */
@@ -103,7 +104,8 @@
 
             <!-- Clickable icons overlay -->
             <div class="icon settings" onclick="handleIconClick('settings')"></div>
-            <div class="icon photos" onclick="showImage()"></div>
+            <div class="icon photos" onclick="showImage('photos')"></div>
+			<div class="icon news" onclick="showImage('news')"></div>
             <div class="icon maps" onclick="handleIconClick('maps')"></div>
 			<div class="icon bgmi" onclick="rotateAndPlayVideo()"><img src="bgmi-modified.png" alt="bgmi Icon" style="width: 100%; height: 100%;"></div>
 			<div class="smallIcon home" onclick="refresh()"></div>
@@ -114,7 +116,8 @@
                 Your browser does not support the video tag.
             </video>
 			<video id="camera" autoplay></video>
-			<img id="image" src="kb.jpg" alt="Mobile Image">
+			<img class="image" id="photos" src="kb.jpg" alt="Mobile Image" onclick="showImage('news')">
+			<img class="image" id="news" src="news.jpg" alt="Mobile Image">
 			<img src="mobileFrontBlock.jpg" alt="block" class="static-image">
         </div>
     </div>
@@ -177,36 +180,9 @@
 			}, 1000); // Wait for the rotation to complete before showing the video 
 		}
 		
-		function rotateAndPlayVideo() {
-    const mobile = document.getElementById('mobile');
-    const video = document.getElementById('video');
-    const source = video.getElementsByTagName('source')[0];
-
-    mobile.style.transform = 'rotate(-90deg)';
-
-    setTimeout(() => {
-        video.style.display = 'block';
-        video.play();
-
-        video.addEventListener('ended', function playNextVideo() {
-            if (source.src.includes('bgmi.mp4')) {
-                source.src = 'bgmi2.mp4';
-                video.load(); // Load the new video
-                video.play(); // Play the new video
-            } else {
-                mobile.style.transform = 'rotate(0deg)';
-                video.style.display = 'none';
-            }
-
-            video.removeEventListener('ended', playNextVideo); // Remove the event listener after the second video ends
-        });
-    }, 1000); // Wait for the rotation to complete before showing the video 
-}
-
-		
-		function showImage() {
+		function showImage(img) {
 			const mobile = document.getElementById('mobile');
-			const image = document.getElementById('image');
+			const image = document.getElementById(img);
     
 			//mobile.style.transform = 'rotate(-90deg)';
 			image.style.display = 'block';
