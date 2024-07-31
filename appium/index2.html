@@ -59,6 +59,9 @@
 		.home { top: 50px; left: 366px; }
 		.rotate { top: 50px; left: 386px; }
 		.camera { top: 50px; left: 346px; }
+		.maximize {top: 50px; left: 174px;}
+		.minimize {top: 50px; left: 164px;}
+		.close {top: 50px; left: 154px;}
 		.photos { top: 125px; left: 232px; }
         .maps { top: 125px; left: 286px; }
         .settings { top: 179px; left: 340px; }
@@ -111,6 +114,9 @@
 			<div class="smallIcon home" onclick="refresh()"></div>
 			<div class="smallIcon rotate" onclick="rotate()"></div>
 			<div class="smallIcon camera" onclick="openCamera()"></div>
+			<div class="smallIcon maximize" onclick="zoomIn()"></div>
+			<div class="smallIcon minimize" onclick="zoomOut()"></div>
+			<div class="smallIcon close" onclick="exit()"></div>
 			<video id="video">
                 <source src="bgmiFinal.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -187,7 +193,43 @@
 			//mobile.style.transform = 'rotate(-90deg)';
 			image.style.display = 'block';
 		}
+		function exit() {
+		//	document.querySelector('.container').style.display = 'none';
+			window.location.href = 'index.html';
+		}
 		
+		function zoomIn() {
+			const style = document.createElement('style');
+			style.innerHTML = `
+				body {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 100vh;
+					margin: 0;
+					transform: scale(1.4); /* Adjust scale as needed */
+					transform-origin: center;
+				}
+			`;
+			document.head.appendChild(style);
+		}
+
+		function zoomOut() {
+			const style = document.createElement('style');
+			style.innerHTML = `
+				body {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 100vh;
+					margin: 0;
+					transform: scale(1); /* Adjust scale as needed */
+					transform-origin: center;
+				}
+			`;
+			document.head.appendChild(style);
+		}
+				
 		
     </script>
     </script>
