@@ -1,5 +1,5 @@
 const imageFolderPath = "../PhotoSection/Marriage/Pics/"; // Path to the folder containing images
-const images = ["puzzle5.jpg","puzzle4.jpg","puzzle3.jpg","puzzle4.jpg","puzzle5.jpg"]; // Manually update this array with your image filenames
+const images = ["puzzle1.jpg","puzzle2.jpg","puzzle3.jpg","puzzle4.jpg","puzzle5.jpg"]; // Manually update this array with your image filenames
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -93,10 +93,18 @@ function checkSolution() {
 
     if (isSolved) {
         document.getElementById('puzzle-container').classList.add('solved');
-        document.getElementById('message').innerText = 'Happy Anniversary!';
+        document.getElementById('message').innerText = 'Speed penchali Bujji!';
         document.getElementById('play-again').style.display = 'block';
         document.getElementById('play-again').style.display = 'inline-block';
 		document.getElementById('puzzle-container').style.gap='0px';
+		document.getElementById('play-again').style.backgroundColor = '#28EB0B';
+        document.getElementById('play-again').style.color = '#1C5099';
+        document.getElementById('play-again').addEventListener('mouseover', function() {
+            this.style.backgroundColor = '#0056b3';
+        });
+        document.getElementById('play-again').addEventListener('mouseout', function() {
+            this.style.backgroundColor = '#007bff';
+        });
     }
 }
 
