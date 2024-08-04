@@ -61,7 +61,7 @@
 			background-color: rgba(255, 255, 255, 0.8);
 			margin: 20px auto;
 			padding: 30px;
-			max-width: 800px;
+			max-width: 1000px;
 			border-radius: 8px;
 			position: relative;
 			z-index: 1;
@@ -469,6 +469,7 @@
       <!-- JavaScript to create falling symbols -->
 	  <script>
 	  	document.addEventListener('DOMContentLoaded', () => {
+		
 	  	function createFallingSymbol() {
 	  		const symbols = ['❤', '💖', '💕', '💓', '💗', '💝'];
 	  		const symbol = symbols[Math.floor(Math.random() * symbols.length)];
@@ -483,7 +484,7 @@
 	  		symbolElement.remove();
 	  		});
 	  	}
-	  
+		
 	  	setInterval(createFallingSymbol, 500);
 	  
 	    const pdfBorderBox = document.getElementById('pdfBorderBox');
@@ -526,6 +527,7 @@
   borderBox5.classList.add('lights-off');
 
   // Function to toggle lights
+  
   const toggleLights = () => {
     borderBox1.classList.toggle('lights-on');
     borderBox1.classList.toggle('lights-off');
@@ -538,6 +540,7 @@
     borderBox5.classList.toggle('lights-on');
     borderBox5.classList.toggle('lights-off');
   };
+  
 
   // Toggle lights every 2 seconds
   setInterval(toggleLights, 500);
