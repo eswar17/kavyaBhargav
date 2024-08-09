@@ -68,6 +68,7 @@ const checkMeet = () => {
             bride.style.backgroundImage = "none";  // Set background image to none for bride
             groom.style.backgroundImage = "none";  // Set background image to none for groom
             isMeeting = true;
+            stopTimer();
         }
     } else {
         // Revert back to original characters
@@ -82,12 +83,11 @@ const checkMeet = () => {
 };
 
 document.addEventListener('keydown', (event) => {
-	if (!isGameStarted) {
+    if (!isGameStarted) {
         startGame();
         isGameStarted = true;
-		musicControl.innerHTML = "Pause Music";
     }
-	
+
     switch(event.key) {
         case 'a':
             moveCharacter(bride, 'left');
@@ -116,7 +116,47 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Touch event handlers for mobile
+let touchStartX = 0;
+let touchStartY = 0;
+
+gameArea.addEventListener('touchstart', (event) => {
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    if (!isGameStarted) {
+        startGame();
+        isGameStarted = true;
+    }
+});
+
+gameArea.addEventListener('touchmove', (event) => {
+    const touch = event.touches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            moveCharacter(bride, 'right');
+        } else {
+            moveCharacter(bride, 'left');
+        }
+    } else {
+        if (deltaY > 0) {
+            moveCharacter(bride, 'down');
+        } else {
+            moveCharacter(bride, 'up');
+        }
+    }
+
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+
+    event.preventDefault();
+});
+
 function startGame() {
+    startTimer();
     backgroundMusic.play().catch(error => {
         console.log('Background music play failed:', error);
     });
@@ -134,3 +174,25 @@ function toggleMusic() {
     }
     isMusicPlaying = !isMusicPlaying;
 }
+
+let startTime;
+let timerInterval;
+
+function startTimer() {
+    startTime = Date.now();
+    timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    const elapsedTime = Date.now() - startTime;
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+    document.getElementById('timer').textContent = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+// Call startTimer() when the game starts
