@@ -1,5 +1,5 @@
 const imageFolderPath = "../PhotoSection/Marriage/Pics/"; // Path to the folder containing images
-const images = ["puzzle1.jpg", "puzzle2.jpg", "puzzle3.jpg", "puzzle4.jpg", "puzzle5.jpg"]; // Manually update this array with your image filenames
+const images =["puzzle1.jpg", "puzzle2.jpg", "puzzle3.jpg", "puzzle4.jpg", "puzzle5.jpg","puzzle6.jpg","puzzle7.jpg","puzzle8.jpg","puzzle9.jpg","puzzle10.jpg","puzzle11.jpg", "puzzle12.jpg", "puzzle13.jpg", "puzzle14.jpg", "puzzle15.jpg","puzzle16.jpg","puzzle17.jpg","puzzle18.jpg"]; // Manually update this array with your image filenames
 
 let timerInterval; // To store the timer interval ID
 let timeElapsed = 0; // To track the elapsed time in seconds
@@ -163,7 +163,14 @@ function checkSolution() {
 
     if (isSolved) {
         stopTimer();
-        const message = timeElapsed <= 60 ? "Maanchi speed undhi neelo" : "Speed penchali Bujji";
+		var message="";
+		if (timeElapsed <= 60) {
+			message = "Maanchi speed undhi neelo";
+		} else if (timeElapsed > 60 && timeElapsed <= 75) {
+			message = "Inkonchem focus cheii";
+		} else {
+			message = "Speed penchali Bujji";
+		}
         document.getElementById('puzzle-container').classList.add('solved');
         document.getElementById('message').innerText = `${message} - Time: ${timeElapsed} seconds`;
         document.getElementById('play-again').style.display = 'block';
@@ -173,9 +180,11 @@ function checkSolution() {
         document.getElementById('play-again').style.color = '#1C5099';
         document.getElementById('play-again').addEventListener('mouseover', function () {
             this.style.backgroundColor = '#0056b3';
+			 this.style.color = '#28EB0B';
         });
         document.getElementById('play-again').addEventListener('mouseout', function () {
-            this.style.backgroundColor = '#007bff';
+            this.style.backgroundColor = '#28EB0B';
+			this.style.color = '#1C5099';
         });
     }
 }
