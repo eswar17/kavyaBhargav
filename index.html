@@ -485,7 +485,20 @@
 	  		});
 	  	}
 		
-	  	setInterval(createFallingSymbol, 500);
+		const intervalId = setInterval(createFallingSymbol, 500);
+
+    // Reset symbols every 2 minutes (120,000 milliseconds)
+		setInterval(() => {
+			// Clear previous interval
+			clearInterval(intervalId);
+	
+			// Remove all falling symbols currently on the screen
+			const fallingSymbols = document.querySelectorAll('.falling-symbol');
+			fallingSymbols.forEach(symbol => symbol.remove());
+	
+			// Start new interval for falling symbols
+			intervalId = setInterval(createFallingSymbol, 500);
+		}, 120000); // 2 minutes in milliseconds
 	  
 	    const pdfBorderBox = document.getElementById('pdfBorderBox');
 	  	const borderBox1 = document.getElementById('bhaavyam');
