@@ -1,5 +1,10 @@
 const imageFolderPath = "../PhotoSection/Marriage/Pics/"; // Path to the folder containing images
-const images = ["puzzle1.jpg","puzzle2.jpg","puzzle3.jpg","puzzle4.jpg","puzzle5.jpg"]; // Manually update this array with your image filenames
+const images = ["puzzle1.jpg", "puzzle2.jpg", "puzzle3.jpg", "puzzle4.jpg", "puzzle5.jpg"]; // Manually update this array with your image filenames
+
+let timerInterval; // To store the timer interval ID
+let timeElapsed = 0; // To track the elapsed time in seconds
+let timerStarted = false; // To check if the timer has started
+let draggedElement = null; // To store the currently dragged element
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -21,7 +26,8 @@ function startGame() {
     container.classList.remove('solved');
     document.getElementById('message').innerText = '';
     document.getElementById('play-again').style.display = 'none';
-	document.getElementById('puzzle-container').style.gap='4px';
+    document.getElementById('puzzle-container').style.gap = '4px';
+    resetTimer();
 
     const positions = [];
     for (let i = 0; i < 25; i++) {
@@ -39,25 +45,17 @@ function startGame() {
         container.appendChild(puzzlePiece);
     });
 
-    let draggedElement = null;
+    // Add event listeners for drag and drop
+    addEventListenersForDragAndDrop(container);
+}
 
+function addEventListenersForDragAndDrop(container) {
     container.addEventListener('dragstart', function (e) {
-        if (e.target.className.includes('puzzle-piece')) {
-            draggedElement = e.target;
-            setTimeout(() => {
-                e.target.style.visibility = 'hidden';
-            }, 0);
-        }
+        handleDragStart(e);
     });
 
     container.addEventListener('dragend', function (e) {
-        if (draggedElement) {
-            setTimeout(() => {
-                draggedElement.style.visibility = 'visible';
-                draggedElement = null;
-                checkSolution();
-            }, 0);
-        }
+        handleDragEnd(e);
     });
 
     container.addEventListener('dragover', function (e) {
@@ -65,19 +63,91 @@ function startGame() {
     });
 
     container.addEventListener('drop', function (e) {
-        e.preventDefault();
-        if (e.target.className.includes('puzzle-piece')) {
-            const draggedPos = draggedElement.style.backgroundPosition;
-            const targetPos = e.target.style.backgroundPosition;
-            draggedElement.style.backgroundPosition = targetPos;
-            e.target.style.backgroundPosition = draggedPos;
-            [draggedElement.dataset.position, e.target.dataset.position] = [e.target.dataset.position, draggedElement.dataset.position];
-        }
+        handleDrop(e);
+    });
+
+    // Add touch event listeners for mobile
+    container.addEventListener('touchstart', function (e) {
+        handleTouchStart(e);
+    });
+
+    container.addEventListener('touchmove', function (e) {
+        handleTouchMove(e);
+    });
+
+    container.addEventListener('touchend', function (e) {
+        handleTouchEnd(e);
     });
 
     document.querySelectorAll('.puzzle-piece').forEach(piece => {
         piece.setAttribute('draggable', true);
     });
+}
+
+function handleDragStart(e) {
+    if (e.target.className.includes('puzzle-piece')) {
+        if (!timerStarted) {
+            startTimer();
+        }
+        draggedElement = e.target;
+        setTimeout(() => {
+            e.target.style.visibility = 'hidden';
+        }, 0);
+    }
+}
+
+function handleDragEnd(e) {
+    if (draggedElement) {
+        setTimeout(() => {
+            draggedElement.style.visibility = 'visible';
+            draggedElement = null;
+            checkSolution();
+        }, 0);
+    }
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    if (e.target.className.includes('puzzle-piece')) {
+        swapPieces(e.target);
+    }
+}
+
+function handleTouchStart(e) {
+    e.preventDefault();
+    if (!timerStarted) {
+        startTimer();
+    }
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (target && target.className.includes('puzzle-piece')) {
+        draggedElement = target;
+    }
+}
+
+function handleTouchMove(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (draggedElement && target && target !== draggedElement && target.className.includes('puzzle-piece')) {
+        swapPieces(target);
+    }
+}
+
+function handleTouchEnd(e) {
+    e.preventDefault();
+    if (draggedElement) {
+        checkSolution();
+        draggedElement = null;
+    }
+}
+
+function swapPieces(target) {
+    const draggedPos = draggedElement.style.backgroundPosition;
+    const targetPos = target.style.backgroundPosition;
+    draggedElement.style.backgroundPosition = targetPos;
+    target.style.backgroundPosition = draggedPos;
+    [draggedElement.dataset.position, target.dataset.position] = [target.dataset.position, draggedElement.dataset.position];
 }
 
 function checkSolution() {
@@ -92,20 +162,41 @@ function checkSolution() {
     });
 
     if (isSolved) {
+        stopTimer();
+        const message = timeElapsed <= 60 ? "Maanchi speed undhi neelo" : "Speed penchali Bujji";
         document.getElementById('puzzle-container').classList.add('solved');
-        document.getElementById('message').innerText = 'Speed penchali Bujji!';
+        document.getElementById('message').innerText = `${message} - Time: ${timeElapsed} seconds`;
         document.getElementById('play-again').style.display = 'block';
         document.getElementById('play-again').style.display = 'inline-block';
-		document.getElementById('puzzle-container').style.gap='0px';
-		document.getElementById('play-again').style.backgroundColor = '#28EB0B';
+        document.getElementById('puzzle-container').style.gap = '0px';
+        document.getElementById('play-again').style.backgroundColor = '#28EB0B';
         document.getElementById('play-again').style.color = '#1C5099';
-        document.getElementById('play-again').addEventListener('mouseover', function() {
+        document.getElementById('play-again').addEventListener('mouseover', function () {
             this.style.backgroundColor = '#0056b3';
         });
-        document.getElementById('play-again').addEventListener('mouseout', function() {
+        document.getElementById('play-again').addEventListener('mouseout', function () {
             this.style.backgroundColor = '#007bff';
         });
     }
+}
+
+function startTimer() {
+    timerStarted = true;
+    timeElapsed = 0;
+    timerInterval = setInterval(() => {
+        timeElapsed++;
+        document.getElementById('message').innerText = `Time: ${timeElapsed} seconds`;
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerStarted = false;
+}
+
+function resetTimer() {
+    stopTimer();
+    document.getElementById('message').innerText = '';
 }
 
 document.getElementById('play-again').addEventListener('click', startGame);
