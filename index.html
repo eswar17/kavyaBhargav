@@ -544,7 +544,7 @@
 	  		});
 	  	}
 		
-		const intervalId = setInterval(createFallingSymbol, 500);
+		const intervalId = setInterval(createFallingSymbol, 5000);
 
     // Reset symbols every 2 minutes (120,000 milliseconds)
 		setInterval(() => {
@@ -556,7 +556,7 @@
 			fallingSymbols.forEach(symbol => symbol.remove());
 	
 			// Start new interval for falling symbols
-			intervalId = setInterval(createFallingSymbol, 500);
+			intervalId = setInterval(createFallingSymbol, 5000);
 		}, 120000); // 2 minutes in milliseconds
 	  
 	    const pdfBorderBox = document.getElementById('pdfBorderBox');
