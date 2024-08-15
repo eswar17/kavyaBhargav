@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -25,29 +26,19 @@
 			cursor: pointer;
 			position: fixed;
 			background: linear-gradient(to right, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+			border-radius: 25px;
+			border:0px;
 		}
-		
-		button {
-  border: solid .05em transparent;
-  border-radius: 125em;
-}
-		
 		
 		#change{left: 11px;}
 		#reset{right: 11px;}
+		
          header, nav {
 			text-align: center;
          }
          header {
 			color: white;
 			padding: 50px 0;
-         }
-         header h1 {
-			font-family: 'Lora', serif;
-			font-size: 3em;
-			color: #fff;
-			text-shadow: 0 0 5px #fff, 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081, 0 0 55px #ff4081, 0 0 75px #ff4081;
-			transform: perspective(500px) rotateY(0deg) rotateX(0deg); /* Centered text with 3D perspective */
          }
          nav {
 			padding: 10px;
@@ -285,6 +276,8 @@
          }
       </style>
       <script>
+	  
+	  
 		let isDefaultTheme = true;
 		
 
@@ -433,6 +426,50 @@
 					contentDiv.innerHTML = '';
 			}
          }
+		 
+        // Given Date and Time
+        const givenDate = new Date('2022-08-20T20:18:00'); // Replace with your given date and time
+
+        function updateTime() {
+            // Current Date and Time
+            const currentDate = new Date();
+
+            // Calculate the difference in milliseconds
+            const diffInMs = currentDate - givenDate;
+
+            // Calculate years
+            let diffInYears = currentDate.getFullYear() - givenDate.getFullYear();
+
+            // Adjust given date to the current year to calculate remaining months, days, etc.
+            const adjustedGivenDate = new Date(givenDate);
+            adjustedGivenDate.setFullYear(currentDate.getFullYear());
+
+            // If adjusted given date is in the future, subtract one year and recalculate
+            if (currentDate < adjustedGivenDate) {
+                adjustedGivenDate.setFullYear(currentDate.getFullYear() - 1);
+                diffInYears--;
+            }
+
+            // Calculate the difference after adjusting for years
+            const diffAfterYears = currentDate - adjustedGivenDate;
+
+            // Convert difference into hours, minutes, and seconds
+            const diffInSeconds = Math.floor(diffAfterYears / 1000);
+            const diffInMinutes = Math.floor(diffInSeconds / 60);
+            const diffInHours = Math.floor(diffInMinutes / 60);
+            const diffInDays = Math.floor(diffInHours / 24);
+
+            const displayHours = diffInHours % 24;
+            const displayMinutes = diffInMinutes % 60;
+            const displaySeconds = diffInSeconds % 60;
+
+            // Update the DOM elements
+            document.getElementById('time-diff').textContent = ` ${diffInYears} Years ${diffInDays} Days ${displayHours} Hours ${displayMinutes} Minutes ${displaySeconds} Seconds`;
+        }
+
+        // Update the time every second
+        setInterval(updateTime, 1000);
+		 
       </script> 
    </head>
    <body>
@@ -455,6 +492,7 @@
                <li><strong>Engagement Date:</strong> Saturday, 18 June 2022</li>
                <li><strong>Marriage Date:</strong> Saturday, 20 August 2022</li>
                <li><strong>Marriage Time:</strong> 08:20 PM</li>
+			   <li><strong>Journey of Love:</strong><div id="time-diff" style="display:inline"></div></li>
                <li><strong>Marriage Place:</strong> Machilipatnam</li>
                <li><strong>Venue Hall:</strong> Mana Kalyana Mandapam</li>
             </ul>
