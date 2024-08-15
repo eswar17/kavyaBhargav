@@ -33,6 +33,12 @@
 		#change{left: 11px;}
 		#reset{right: 11px;}
 		
+        #heartbeat {
+            width: 30px;
+            vertical-align: middle;
+            margin-left: 0px;
+        }
+		
          header, nav {
 			text-align: center;
          }
@@ -465,6 +471,14 @@
 
             // Update the DOM elements
             document.getElementById('time-diff').textContent = ` ${diffInYears} Years ${diffInDays} Days ${displayHours} Hours ${displayMinutes} Minutes ${displaySeconds} Seconds`;
+			
+			if (!document.getElementById('heartbeat')) {
+                const heartGif = document.createElement('img');
+                heartGif.src = 'heartbeat.gif'; // Replace with the path to your heartbeat GIF
+                heartGif.id = 'heartbeat';
+                document.getElementById('time-diff').appendChild(heartGif);
+            }
+			
         }
 
         // Update the time every second
