@@ -474,9 +474,17 @@
             const displayHours = diffInHours % 24;
             const displayMinutes = diffInMinutes % 60;
             const displaySeconds = diffInSeconds % 60;
+			
+			let y,d,h,m,s;
+			
+			if(diffInYears>1){y=`${diffInYears} Years`;} else{y=`${diffInYears} Year`}
+			if(diffInDays === 0) {d = '';} else if (diffInDays === 1) {d = `${diffInDays} Day`;} else {d = `${diffInDays} Days`;}
+			if(displayHours === 0) {h = '';} else if (displayHours === 1) {h = `${displayHours} Hour`;} else {h = `${displayHours} Hours`;}
+			if(displayMinutes === 0) {m = '';} else if (displayMinutes === 1) {m = `${displayMinutes} Minute`;} else {m = `${displayMinutes} Minutes`;}
+			if(displaySeconds === 0) {s = '';} else if (displaySeconds === 1) {s = `${displaySeconds} Second`;} else {s = `${displaySeconds} Seconds`;}
 
             // Update the DOM elements
-            document.getElementById('time-diff').textContent = ` ${diffInYears} Years ${diffInDays} Days ${displayHours} Hours ${displayMinutes} Minutes ${displaySeconds} Seconds`;
+            document.getElementById('time-diff').textContent = `  ${y} ${d} ${h} ${m} ${s}`;
 			
 			if (!document.getElementById('heartbeat')) {
                 const heartGif = document.createElement('img');
