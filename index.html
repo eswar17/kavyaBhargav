@@ -497,6 +497,48 @@
 
         // Update the time every second
         setInterval(updateTime, 1000);
+		
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the video element
+    const videoMessage = document.getElementById('videoMessage');
+
+    // Function to mute the video
+    function muteVideo() {
+        if (videoMessage) {
+            if (!videoMessage.paused) {
+            videoMessage.pause();
+        } 
+        }
+    }
+
+    // Listen for any click event on the entire document
+    document.addEventListener('click', function() {
+        muteVideo();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all video elements in the section
+    const videos = document.querySelectorAll('#videos video');
+
+    // Function to pause all videos except the one being played
+    function pauseOtherVideos(currentVideo) {
+        videos.forEach(video => {
+            if (video !== currentVideo) {
+                video.pause();
+            }
+        });
+    }
+
+    // Add event listeners to each video
+    videos.forEach(video => {
+        video.addEventListener('play', function() {
+            pauseOtherVideos(video);
+        });
+    });
+});
+
+
 		 
       </script> 
    </head>
@@ -560,19 +602,19 @@
       <section id="videos" style="display:none;"  class="border-box" >
          <h2>Video Messages</h2>
          <p>Watch messages from friends and family.</p>
-         <video controls>
+         <video id="videoMessage" controls>
             <source src="./videos/messages/pavan.mp4" type="video/mp4">
             Your browser does not support the video tag.
          </video>
-         <video controls>
+         <video id="videoMessage" controls>
             <source src="./videos/messages/sowjanya.mp4" type="video/mp4">
             Your browser does not support the video tag.
          </video>
-         <video controls>
+         <video id="videoMessage" controls>
             <source src="./videos/messages/charan.mp4" type="video/mp4">
             Your browser does not support the video tag.
          </video>
-         <video controls>
+         <video id="videoMessage" controls>
             <source src="./videos/messages/eswar.mp4" type="video/mp4">
             Your browser does not support the video tag.
          </video>
